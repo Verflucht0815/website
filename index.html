@@ -3,412 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESP32 & 3D Projekte Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Portfolio Baukasten</title>
+    <link rel="stylesheet" href="baukasten.css">
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">Dein NPC 0815 TechPortfolio</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#projekte">DevKit Projekte</a></li>
-                <li><a href="#3d-druck">3D Druck & Modellierung</a></li>
-                <li><a href="#tutorials">Tutorials</a></li>
-                <li><a href="#wissen">Wissensdatenbank</a></li>
-                <li><a href="#social">Social Media</a></li>
-                <li><a href="#ueber">Über mich</a></li>
-                <li><a href="#kontakt">Kontakt</a></li>
-            </ul>
-            <div class="mobile-menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>ESP32 & 3D Innovation</h1>
-                <p>Lehrreiche Elektronikprojekte, 3D-Designs und Tutorials mit modernster Technologie</p>
-                <a href="#projekte" class="cta-button">Projekte entdecken</a>
-            </div>
-        </section>
-
-        <!-- ESP32 Projekte Section -->
-        <section id="projekte" class="section">
-            <div class="container">
-                <h2 class="section-title fade-in">ESP32 Projekte</h2>
-                
-                <div class="projects-grid">
-                    <div class="project-card fade-in placeholder-card">
-                        <span class="project-icon">⏳</span>
-                        <h3>Spannendes Projekt in Arbeit</h3>
-                        <p>Hier entsteht gerade ein innovatives ESP32-Projekt. Bleib dran für Updates und detaillierte Dokumentation!</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">ESP32</span>
-                            <span class="tech-tag">Coming Soon</span>
-                        </div>
-                        <div class="coming-soon-badge">Bald verfügbar</div>
-                    </div>
-
-                    <div class="project-card fade-in placeholder-card">
-                        <span class="project-icon">🔮</span>
-                        <h3>Geheimprojekt #1</h3>
-                        <p>Ein mysteriöses IoT-Projekt nimmt Gestalt an. Die ersten Tests laufen vielversprechend...</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">IoT</span>
-                            <span class="tech-tag">Sensoren</span>
-                            <span class="tech-tag">In Entwicklung</span>
-                        </div>
-                        <div class="coming-soon-badge">In Entwicklung</div>
-                    </div>
-
-                    <div class="project-card fade-in placeholder-card">
-                        <span class="project-icon">🚀</span>
-                        <h3>Future Tech Project</h3>
-                        <p>Die nächste Generation der Hausautomation wartet darauf, enthüllt zu werden. Revolutionary features incoming!</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Smart Home</span>
-                            <span class="tech-tag">KI Integration</span>
-                            <span class="tech-tag">Konzeptphase</span>
-                        </div>
-                        <div class="coming-soon-badge">Konzeptphase</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3D Druck & Modellierung Section -->
-        <section id="3d-druck" class="section dark-section">
-            <div class="container">
-                <h2 class="section-title fade-in">3D Druck & Modellierung</h2>
-                
-                <div class="projects-grid">
-                    <div class="project-card fade-in placeholder-card">
-                        <span class="project-icon">🎨</span>
-                        <h3>Funktionales Design in Arbeit</h3>
-                        <p>Ein durchdachtes 3D-Design für den perfekten ESP32-Case entsteht. Optimiert für Kühlung und Ästhetik.</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Fusion 360</span>
-                            <span class="tech-tag">Funktional</span>
-                            <span class="tech-tag">Designphase</span>
-                        </div>
-                        <div class="coming-soon-badge">Designphase</div>
-                    </div>
-
-                    <div class="project-card fade-in placeholder-card">
-                        <span class="project-icon">🏗️</span>
-                        <h3>Mechanisches Meisterwerk</h3>
-                        <p>Eine komplexe mechanische Konstruktion mit beweglichen Teilen wird gerade perfektioniert.</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Mechanik</span>
-                            <span class="tech-tag">PETG</span>
-                            <span class="tech-tag">Prototyping</span>
-                        </div>
-                        <div class="coming-soon-badge">Prototyping</div>
-                    </div>
-
-                    <div class="project-card fade-in placeholder-card">
-                        <span class="project-icon">🎯</span>
-                        <h3>Präzisions-Modell</h3>
-                        <p>Ein hochpräzises 3D-Modell für spezielle Anwendungen befindet sich in der finalen Testphase.</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Precision</span>
-                            <span class="tech-tag">Multi-Material</span>
-                            <span class="tech-tag">Testing</span>
-                        </div>
-                        <div class="coming-soon-badge">Testphase</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Tutorials Section -->
-        <section id="tutorials" class="section">
-            <div class="container">
-                <h2 class="section-title fade-in">Tutorials & Anleitungen</h2>
-                
-                <div class="tutorials-grid">
-                    <div class="tutorial-card fade-in placeholder-card">
-                        <div class="tutorial-thumbnail">
-                            <span class="tutorial-icon">📚</span>
-                        </div>
-                        <div class="tutorial-content">
-                            <h3>ESP32 Grundlagen</h3>
-                            <p>Vollständiger Einsteiger-Guide für ESP32 Entwicklung</p>
-                            <div class="tutorial-meta">
-                                <span class="tutorial-duration">⏱️ 45 Min</span>
-                                <span class="tutorial-level">🎯 Anfänger</span>
-                            </div>
-                            <div class="coming-soon-badge">Demnächst</div>
-                        </div>
-                    </div>
-
-                    <div class="tutorial-card fade-in placeholder-card">
-                        <div class="tutorial-thumbnail">
-                            <span class="tutorial-icon">🎨</span>
-                        </div>
-                        <div class="tutorial-content">
-                            <h3>3D-Design Workflow</h3>
-                            <p>Von der Idee zum fertigen 3D-Druck - Step by Step</p>
-                            <div class="tutorial-meta">
-                                <span class="tutorial-duration">⏱️ 60 Min</span>
-                                <span class="tutorial-level">🎯 Fortgeschritten</span>
-                            </div>
-                            <div class="coming-soon-badge">In Bearbeitung</div>
-                        </div>
-                    </div>
-
-                    <div class="tutorial-card fade-in placeholder-card">
-                        <div class="tutorial-thumbnail">
-                            <span class="tutorial-icon">⚡</span>
-                        </div>
-                        <div class="tutorial-content">
-                            <h3>IoT Security Best Practices</h3>
-                            <p>Sicherheit in IoT-Projekten - Worauf es ankommt</p>
-                            <div class="tutorial-meta">
-                                <span class="tutorial-duration">⏱️ 30 Min</span>
-                                <span class="tutorial-level">🎯 Experte</span>
-                            </div>
-                            <div class="coming-soon-badge">Geplant</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Wissensdatenbank Section -->
-        <section id="wissen" class="section dark-section">
-            <div class="container">
-                <h2 class="section-title fade-in">Wissensdatenbank</h2>
-                
-                <div class="knowledge-grid">
-                    <div class="knowledge-category fade-in">
-                        <div class="category-header">
-                            <span class="category-icon">🔧</span>
-                            <h3>Hardware Wissen</h3>
-                        </div>
-                        <div class="knowledge-items">
-                            <div class="knowledge-item placeholder-item">
-                                <h4>ESP32 Pinout Guide</h4>
-                                <p>Vollständige Pin-Referenz</p>
-                                <div class="coming-soon-badge">Sammlung wächst</div>
-                            </div>
-                            <div class="knowledge-item placeholder-item">
-                                <h4>Sensor Kompatibilität</h4>
-                                <p>Welche Sensoren funktionieren wie</p>
-                                <div class="coming-soon-badge">In Arbeit</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="knowledge-category fade-in">
-                        <div class="category-header">
-                            <span class="category-icon">💻</span>
-                            <h3>Software Tipps</h3>
-                        </div>
-                        <div class="knowledge-items">
-                            <div class="knowledge-item placeholder-item">
-                                <h4>Arduino IDE Setup</h4>
-                                <p>Optimale Konfiguration</p>
-                                <div class="coming-soon-badge">Wird erstellt</div>
-                            </div>
-                            <div class="knowledge-item placeholder-item">
-                                <h4>Debugging Tricks</h4>
-                                <p>Häufige Probleme lösen</p>
-                                <div class="coming-soon-badge">Sammlung wächst</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="knowledge-category fade-in">
-                        <div class="category-header">
-                            <span class="category-icon">🎨</span>
-                            <h3>3D-Druck Know-how</h3>
-                        </div>
-                        <div class="knowledge-items">
-                            <div class="knowledge-item placeholder-item">
-                                <h4>Material Guide</h4>
-                                <p>PLA vs PETG vs ABS</p>
-                                <div class="coming-soon-badge">In Vorbereitung</div>
-                            </div>
-                            <div class="knowledge-item placeholder-item">
-                                <h4>Print Settings</h4>
-                                <p>Optimale Druckparameter</p>
-                                <div class="coming-soon-badge">Wird ergänzt</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Social Media Section -->
-        <section id="social" class="section">
-            <div class="container">
-                <h2 class="section-title fade-in">Social Media & Updates</h2>
-                
-                <div class="social-content">
-                    <div class="social-main fade-in">
-                        <div class="tiktok-embed-container">
-                            <div class="tiktok-placeholder">
-                                <span class="social-icon">🎬</span>
-                                <h3>Neuestes TikTok Video</h3>
-                                <p>Hier wird automatisch mein neuester TikTok-Content angezeigt</p>
-                                <div class="tiktok-embed-instructions">
-                                    <!-- TikTok Embed wird hier eingefügt -->
-                                    <div class="placeholder-video">
-                                        <div class="video-thumbnail">
-                                            <span class="play-icon">▶️</span>
-                                        </div>
-                                        <div class="video-info">
-                                            <h4>Kommendes Video Preview</h4>
-                                            <p>Spannende ESP32 Tipps & Tricks</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="social-sidebar fade-in">
-                        <div class="social-stats">
-                            <h3>Folge mir für Updates</h3>
-                            <div class="social-links-extended">
-                                <a href="#" class="social-link tiktok">
-                                    <span class="social-emoji">🎵</span>
-                                    <div>
-                                        <strong>TikTok</strong>
-                                        <span>@dein_username</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="social-link youtube">
-                                    <span class="social-emoji">📺</span>
-                                    <div>
-                                        <strong>YouTube</strong>
-                                        <span>Tutorials & Builds</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="social-link instagram">
-                                    <span class="social-emoji">📸</span>
-                                    <div>
-                                        <strong>Instagram</strong>
-                                        <span>Behind the Scenes</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="latest-updates">
-                            <h4>Letzte Updates</h4>
-                            <div class="update-item">
-                                <span class="update-date">Heute</span>
-                                <p>Neues 3D-Design in Arbeit 🎨</p>
-                            </div>
-                            <div class="update-item">
-                                <span class="update-date">Gestern</span>
-                                <p>Tutorial-Serie geplant 📚</p>
-                            </div>
-                            <div class="update-item">
-                                <span class="update-date">Diese Woche</span>
-                                <p>ESP32 Projekt startet bald ⚡</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Über mich Section -->
-        <section id="ueber" class="section dark-section">
-            <div class="container">
-                <h2 class="section-title fade-in">Über mich</h2>
-                <div class="about-content">
-                    <p class="about-text fade-in">
-                        Willkommen in meiner Welt der Elektronik und 3D-Innovation! Ich bin leidenschaftlicher Maker, 
-                        der die Grenzen zwischen Hardware und Software verschwimmen lässt. Meine Mission ist es, 
-                        komplexe Technologien zugänglich zu machen und andere zu inspirieren, selbst zu erschaffen.
-                    </p>
-                    
-                    <div class="skills-grid">
-                        <div class="skill-item fade-in">
-                            <span class="skill-icon">🔧</span>
-                            <h3>ESP32 & Hardware</h3>
-                            <p>Mikrocontroller, Sensoren, PCB Design, Prototyping</p>
-                        </div>
-                        <div class="skill-item fade-in">
-                            <span class="skill-icon">💻</span>
-                            <h3>Software Development</h3>
-                            <p>C++, Python, JavaScript, IoT Protocols</p>
-                        </div>
-                        <div class="skill-item fade-in">
-                            <span class="skill-icon">🎨</span>
-                            <h3>3D Design & Druck</h3>
-                            <p>Fusion 360, CAD, FDM/SLA Printing</p>
-                        </div>
-                        <div class="skill-item fade-in">
-                            <span class="skill-icon">🌐</span>
-                            <h3>IoT & Vernetzung</h3>
-                            <p>MQTT, WiFi, Bluetooth, Cloud Integration</p>
-                        </div>
-                        <div class="skill-item fade-in">
-                            <span class="skill-icon">📱</span>
-                            <h3>Content Creation</h3>
-                            <p>Tutorials, Social Media, Tech Education</p>
-                        </div>
-                        <div class="skill-item fade-in">
-                            <span class="skill-icon">🚀</span>
-                            <h3>Innovation & Trends</h3>
-                            <p>Emerging Tech, AI Integration, Future Vision</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer id="kontakt">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Kontakt</h3>
-                    <div class="contact-info">
-                        <a href="mailto:deine.email@example.com">✉️ deine.email@example.com</a>
-                    </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Folge mir</h3>
-                    <div class="footer-social">
-                        <a href="https://github.com/deinusername" target="_blank" title="GitHub">📁 GitHub</a>
-                        <a href="https://tiktok.com/@deinusername" target="_blank" title="TikTok">🎵 TikTok</a>
-                        <a href="https://youtube.com/@deinkanal" target="_blank" title="YouTube">📺 YouTube</a>
-                        <a href="https://instagram.com/deinusername" target="_blank" title="Instagram">📸 Instagram</a>
-                    </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Ressourcen</h3>
-                    <div class="footer-links">
-                        <a href="https://www.thingiverse.com/deinusername" target="_blank">🔧 Thingiverse</a>
-                        <a href="#tutorials">📚 Tutorials</a>
-                        <a href="#wissen">💡 Wissensdatenbank</a>
-                    </div>
+    <!-- Baukasten Editor (nur im Entwicklungsmodus sichtbar) -->
+    <div id="baukasten-editor" class="baukasten-panel">
+        <div class="editor-header">
+            <h2>🔧 Portfolio Baukasten</h2>
+            <button id="toggle-editor" class="toggle-btn">Editor ausblenden</button>
+        </div>
+        
+        <div class="editor-sections">
+            <div class="editor-section">
+                <h3>📦 Komponenten hinzufügen</h3>
+                <div class="component-buttons">
+                    <button class="add-component" data-type="project-card">➕ Projekt Card</button>
+                    <button class="add-component" data-type="skill-item">➕ Skill Item</button>
+                    <button class="add-component" data-type="tutorial-card">➕ Tutorial Card</button>
+                    <button class="add-component" data-type="knowledge-category">➕ Wissens-Kategorie</button>
+                    <button class="add-component" data-type="social-link">➕ Social Link</button>
+                    <button class="add-component" data-type="update-item">➕ Update Item</button>
                 </div>
             </div>
             
-            <div class="footer-bottom">
-                <p>&copy; 2024 ESP32 & 3D Innovation Portfolio. Alle Rechte vorbehalten.</p>
-                <p>Made with ❤️ and lots of ☕</p>
+            <div class="editor-section">
+                <h3>🎨 Design anpassen</h3>
+                <div class="design-controls">
+                    <label>
+                        Hauptfarbe:
+                        <input type="color" id="primary-color" value="#3b82f6">
+                    </label>
+                    <label>
+                        Akzentfarbe:
+                        <input type="color" id="accent-color" value="#8b5cf6">
+                    </label>
+                    <label>
+                        Dark Mode:
+                        <input type="checkbox" id="dark-mode" checked>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="editor-section">
+                <h3>📁 Export/Import</h3>
+                <div class="file-controls">
+                    <button id="export-config">📤 Konfiguration exportieren</button>
+                    <input type="file" id="import-config" accept=".json" style="display: none;">
+                    <button id="import-btn">📥 Konfiguration importieren</button>
+                    <button id="generate-files">🚀 Website-Dateien generieren</button>
+                </div>
             </div>
         </div>
-    </footer>
+    </div>
 
-    <script src="script.js"></script>
+    <!-- Website Content Container -->
+    <div id="website-container">
+        <!-- Header Template -->
+        <header class="component" data-component="header">
+            <nav class="container">
+                <div class="logo editable" data-field="logo">TechPortfolio</div>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#home" class="editable" data-field="nav-home">Home</a></li>
+                    <li><a href="#projekte" class="editable" data-field="nav-projects">Projekte</a></li>
+                    <li><a href="#ueber" class="editable" data-field="nav-about">Über mich</a></li>
+                </ul>
+                <div class="component-controls">
+                    <button class="edit-component">✏️</button>
+                    <button class="delete-component">🗑️</button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Hero Section Template -->
+        <section id="home" class="hero component" data-component="hero">
+            <div class="hero-content">
+                <h1 class="editable" data-field="hero-title">Dein Portfolio Titel</h1>
+                <p class="editable" data-field="hero-subtitle">Deine Beschreibung hier</p>
+                <a href="#projekte" class="cta-button editable" data-field="hero-cta">Call to Action</a>
+            </div>
+            <div class="component-controls">
+                <button class="edit-component">✏️</button>
+                <button class="move-up">⬆️</button>
+                <button class="move-down">⬇️</button>
+            </div>
+        </section>
+
+        <!-- Projekte Section Template -->
+        <section id="projekte" class="section component" data-component="projects-section">
+            <div class="container">
+                <h2 class="section-title editable" data-field="projects-title">Meine Projekte</h2>
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Projekt Cards werden hier dynamisch eingefügt -->
+                </div>
+            </div>
+            <div class="component-controls">
+                <button class="edit-component">✏️</button>
+                <button class="add-child" data-child-type="project-card">➕ Projekt</button>
+                <button class="move-up">⬆️</button>
+                <button class="move-down">⬇️</button>
+                <button class="delete-component">🗑️</button>
+            </div>
+        </section>
+
+        <!-- Skills Section Template -->
+        <section class="section component dark-section" data-component="skills-section">
+            <div class="container">
+                <h2 class="section-title editable" data-field="skills-title">Meine Skills</h2>
+                <div class="skills-grid" id="skills-grid">
+                    <!-- Skill Items werden hier dynamisch eingefügt -->
+                </div>
+            </div>
+            <div class="component-controls">
+                <button class="edit-component">✏️</button>
+                <button class="add-child" data-child-type="skill-item">➕ Skill</button>
+                <button class="move-up">⬆️</button>
+                <button class="move-down">⬇️</button>
+                <button class="delete-component">🗑️</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Komponenten Templates -->
+    <div id="component-templates" style="display: none;">
+        <!-- Projekt Card Template -->
+        <div class="project-card template" data-template="project-card">
+            <span class="project-icon editable" data-field="icon">⚡</span>
+            <h3 class="editable" data-field="title">Projekt Titel</h3>
+            <p class="editable" data-field="description">Projekt Beschreibung</p>
+            <div class="tech-stack">
+                <span class="tech-tag editable" data-field="tech1">Tech 1</span>
+                <span class="tech-tag editable" data-field="tech2">Tech 2</span>
+            </div>
+            <div class="component-controls">
+                <button class="edit-component">✏️</button>
+                <button class="duplicate-component">📋</button>
+                <button class="delete-component">🗑️</button>
+            </div>
+        </div>
+
+        <!-- Skill Item Template -->
+        <div class="skill-item template" data-template="skill-item">
+            <span class="skill-icon editable" data-field="icon">🔧</span>
+            <h3 class="editable" data-field="title">Skill Name</h3>
+            <p class="editable" data-field="description">Skill Beschreibung</p>
+            <div class="component-controls">
+                <button class="edit-component">✏️</button>
+                <button class="duplicate-component">📋</button>
+                <button class="delete-component">🗑️</button>
+            </div>
+        </div>
+
+        <!-- Tutorial Card Template -->
+        <div class="tutorial-card template" data-template="tutorial-card">
+            <div class="tutorial-thumbnail">
+                <span class="tutorial-icon editable" data-field="icon">📚</span>
+            </div>
+            <div class="tutorial-content">
+                <h3 class="editable" data-field="title">Tutorial Titel</h3>
+                <p class="editable" data-field="description">Tutorial Beschreibung</p>
+                <div class="tutorial-meta">
+                    <span class="tutorial-duration editable" data-field="duration">⏱️ 30 Min</span>
+                    <span class="tutorial-level editable" data-field="level">🎯 Anfänger</span>
+                </div>
+            </div>
+            <div class="component-controls">
+                <button class="edit-component">✏️</button>
+                <button class="duplicate-component">📋</button>
+                <button class="delete-component">🗑️</button>
+            </div>
+        </div>
+
+        <!-- Social Link Template -->
+        <div class="social-link template" data-template="social-link">
+            <span class="social-emoji editable" data-field="emoji">🔗</span>
+            <div>
+                <strong class="editable" data-field="platform">Platform</strong>
+                <span class="editable" data-field="handle">@handle</span>
+            </div>
+            <div class="component-controls">
+                <button class="edit-component">✏️</button>
+                <button class="duplicate-component">📋</button>
+                <button class="delete-component">🗑️</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Komponente bearbeiten</h3>
+                <button class="close-modal">✕</button>
+            </div>
+            <div class="modal-body" id="edit-form">
+                <!-- Dynamisches Bearbeitungsformular -->
+            </div>
+            <div class="modal-footer">
+                <button id="save-changes" class="btn-primary">Änderungen speichern</button>
+                <button id="cancel-edit" class="btn-secondary">Abbrechen</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview/Export Modal -->
+    <div id="preview-modal" class="modal" style="display: none;">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>Website Preview & Export</h3>
+                <button class="close-modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="preview-tabs">
+                    <button class="tab-btn active" data-tab="preview">👁️ Preview</button>
+                    <button class="tab-btn" data-tab="html">📄 HTML</button>
+                    <button class="tab-btn" data-tab="css">🎨 CSS</button>
+                    <button class="tab-btn" data-tab="js">⚡ JavaScript</button>
+                </div>
+                <div class="tab-content">
+                    <div id="preview-tab" class="tab-pane active">
+                        <iframe id="preview-frame"></iframe>
+                    </div>
+                    <div id="html-tab" class="tab-pane">
+                        <textarea id="generated-html" readonly></textarea>
+                    </div>
+                    <div id="css-tab" class="tab-pane">
+                        <textarea id="generated-css" readonly></textarea>
+                    </div>
+                    <div id="js-tab" class="tab-pane">
+                        <textarea id="generated-js" readonly></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="download-files" class="btn-primary">📥 Dateien herunterladen</button>
+                <button class="close-modal btn-secondary">Schließen</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="baukasten.js"></script>
 </body>
 </html>
