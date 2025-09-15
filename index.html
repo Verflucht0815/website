@@ -3,245 +3,451 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Baukasten</title>
-    <link rel="stylesheet" href="baukasten.css">
+    <title>ESP32 LED Blink Tutorial - Verbesserte Version</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .hero {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-bottom: 15px;
+            margin-top: 25px;
+            font-size: 1.2rem;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+            white-space: pre-wrap; /* Bessere Lesbarkeit auf kleinen Bildschirmen */
+        }
+
+        .code-comment {
+            color: #6f42c1;
+            font-style: italic;
+        }
+
+        .code-keyword {
+            color: #d73a49;
+            font-weight: bold;
+        }
+
+        .code-string {
+            color: #032f62;
+        }
+
+        .code-function {
+            color: #005cc5;
+        }
+
+        .code-number {
+            color: #22863a; /* Neu: Für Zahlen */
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #f39c12;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #17a2b8;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #28a745;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .download-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 10px 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .download-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .pin-diagram {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                padding: 25px;
+            }
+            
+            .content-card {
+                padding: 20px;
+            }
+
+            .code-block {
+                font-size: 12px; /* Kleiner auf Mobil für bessere Lesbarkeit */
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Baukasten Editor (nur im Entwicklungsmodus sichtbar) -->
-    <div id="baukasten-editor" class="baukasten-panel">
-        <div class="editor-header">
-            <h2>🔧 Portfolio Baukasten</h2>
-            <button id="toggle-editor" class="toggle-btn">Editor ausblenden</button>
-        </div>
-        
-        <div class="editor-sections">
-            <div class="editor-section">
-                <h3>📦 Komponenten hinzufügen</h3>
-                <div class="component-buttons">
-                    <button class="add-component" data-type="project-card">➕ Projekt Card</button>
-                    <button class="add-component" data-type="skill-item">➕ Skill Item</button>
-                    <button class="add-component" data-type="tutorial-card">➕ Tutorial Card</button>
-                    <button class="add-component" data-type="knowledge-category">➕ Wissens-Kategorie</button>
-                    <button class="add-component" data-type="social-link">➕ Social Link</button>
-                    <button class="add-component" data-type="update-item">➕ Update Item</button>
-                </div>
+    <div class="container">
+        <header>
+            <div class="hero">
+                <h1>💡 ESP32 LED Blink Tutorial - Verbesserte Version</h1>
+                <p class="subtitle">Dein erstes ESP32-Projekt - LED zum Blinken bringen. Mit besser gegliedertem Code und mehr Tipps für Anfänger.</p>
             </div>
-            
-            <div class="editor-section">
-                <h3>🎨 Design anpassen</h3>
-                <div class="design-controls">
-                    <label>
-                        Hauptfarbe:
-                        <input type="color" id="primary-color" value="#3b82f6">
-                    </label>
-                    <label>
-                        Akzentfarbe:
-                        <input type="color" id="accent-color" value="#8b5cf6">
-                    </label>
-                    <label>
-                        Dark Mode:
-                        <input type="checkbox" id="dark-mode" checked>
-                    </label>
-                </div>
-            </div>
-            
-            <div class="editor-section">
-                <h3>📁 Export/Import</h3>
-                <div class="file-controls">
-                    <button id="export-config">📤 Konfiguration exportieren</button>
-                    <input type="file" id="import-config" accept=".json" style="display: none;">
-                    <button id="import-btn">📥 Konfiguration importieren</button>
-                    <button id="generate-files">🚀 Website-Dateien generieren</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Website Content Container -->
-    <div id="website-container">
-        <!-- Header Template -->
-        <header class="component" data-component="header">
-            <nav class="container">
-                <div class="logo editable" data-field="logo">TechPortfolio</div>
-                <ul class="nav-links" id="nav-links">
-                    <li><a href="#home" class="editable" data-field="nav-home">Home</a></li>
-                    <li><a href="#projekte" class="editable" data-field="nav-projects">Projekte</a></li>
-                    <li><a href="#ueber" class="editable" data-field="nav-about">Über mich</a></li>
-                </ul>
-                <div class="component-controls">
-                    <button class="edit-component">✏️</button>
-                    <button class="delete-component">🗑️</button>
-                </div>
-            </nav>
         </header>
 
-        <!-- Hero Section Template -->
-        <section id="home" class="hero component" data-component="hero">
-            <div class="hero-content">
-                <h1 class="editable" data-field="hero-title">Dein Portfolio Titel</h1>
-                <p class="editable" data-field="hero-subtitle">Deine Beschreibung hier</p>
-                <a href="#projekte" class="cta-button editable" data-field="hero-cta">Call to Action</a>
-            </div>
-            <div class="component-controls">
-                <button class="edit-component">✏️</button>
-                <button class="move-up">⬆️</button>
-                <button class="move-down">⬇️</button>
-            </div>
-        </section>
+        <main>
+            <!-- Arduino IDE Setup -->
+            <div class="content-card">
+                <h2>🔧 Arduino IDE für ESP32 einrichten</h2>
+                
+                <h3><span class="step-number">1</span>Arduino IDE herunterladen</h3>
+                <p>Falls noch nicht vorhanden, lade die Arduino IDE von der offiziellen Website herunter. Achte auf die neueste Version (aktuell 2.x), um Kompatibilitätsprobleme zu vermeiden.</p>
+                <a href="https://www.arduino.cc/en/software" class="download-link" target="_blank">Arduino IDE Download</a>
+                
+                <h3><span class="step-number">2</span>ESP32 Board-Package installieren</h3>
+                <ol>
+                    <li>Öffne die Arduino IDE.</li>
+                    <li>Gehe zu <strong>Datei → Voreinstellungen</strong>.</li>
+                    <li>Füge diese URL in das Feld "Zusätzliche Boardverwalter-URLs" ein (falls mehrere URLs, durch Komma trennen):</li>
+                </ol>
+                
+                <div class="code-block">https://dl.espressif.com/dl/package_esp32_index.json</div>
+                
+                <ol start="4">
+                    <li>Klicke auf "OK".</li>
+                    <li>Gehe zu <strong>Werkzeuge → Board → Boardverwalter...</strong>.</li>
+                    <li>Suche nach "esp32" und installiere das neueste Package von Espressif Systems (z.B. Version 3.x für aktuelle Features).</li>
+                </ol>
 
-        <!-- Projekte Section Template -->
-        <section id="projekte" class="section component" data-component="projects-section">
-            <div class="container">
-                <h2 class="section-title editable" data-field="projects-title">Meine Projekte</h2>
-                <div class="projects-grid" id="projects-grid">
-                    <!-- Projekt Cards werden hier dynamisch eingefügt -->
+                <div class="info-box">
+                    <strong>💡 Tipp:</strong> Die Installation kann 5-10 Minuten dauern. Schließe keine anderen Programme, die USB-Ports nutzen, um Konflikte zu vermeiden.
+                </div>
+
+                <h3><span class="step-number">3</span>ESP32 Board auswählen</h3>
+                <ol>
+                    <li>Schließe deinen ESP32 per USB an den Computer an (verwende ein gutes Kabel, um Verbindungsfehler zu vermeiden).</li>
+                    <li>Gehe zu <strong>Werkzeuge → Board → ESP32 Arduino</strong>.</li>
+                    <li>Wähle dein ESP32-Board aus (z.B. "ESP32 Dev Module" oder "DOIT ESP32 DEVKIT V1" – schau in dein Board-Datenblatt, wenn unsicher).</li>
+                    <li>Wähle den korrekten Port unter <strong>Werkzeuge → Port</strong> (wenn nicht sichtbar, überprüfe Gerätemanager unter Windows).</li>
+                </ol>
+
+                <div class="warning-box">
+                    <strong>⚠️ Wichtig:</strong> Unter Windows/Mac/Linux können USB-Treiber fehlen. Lade CP210x oder CH340-Treiber von der Espressif-Website, falls der Port nicht erkannt wird.
                 </div>
             </div>
-            <div class="component-controls">
-                <button class="edit-component">✏️</button>
-                <button class="add-child" data-child-type="project-card">➕ Projekt</button>
-                <button class="move-up">⬆️</button>
-                <button class="move-down">⬇️</button>
-                <button class="delete-component">🗑️</button>
-            </div>
-        </section>
 
-        <!-- Skills Section Template -->
-        <section class="section component dark-section" data-component="skills-section">
-            <div class="container">
-                <h2 class="section-title editable" data-field="skills-title">Meine Skills</h2>
-                <div class="skills-grid" id="skills-grid">
-                    <!-- Skill Items werden hier dynamisch eingefügt -->
+            <!-- Das Projekt -->
+            <div class="content-card">
+                <h2>💻 Das LED Blink Projekt</h2>
+                
+                <div class="success-box">
+                    <strong>🎯 Ziel:</strong> Wir bringen die eingebaute LED des ESP32 zum Blinken - das "Hello World" der Mikrocontroller-Programmierung! Perfekt für Anfänger, um Basics zu lernen.
+                </div>
+
+                <h3>Was du brauchst:</h3>
+                <ul>
+                    <li>ESP32 Development Board (z.B. ESP32-WROOM-32).</li>
+                    <li>USB-Kabel (Micro-USB oder Type-C, je nach Board).</li>
+                    <li>Computer mit Arduino IDE.</li>
+                    <li>Optionale: Externe LED und Widerstand, falls die eingebaute nicht funktioniert.</li>
+                </ul>
+
+                <div class="pin-diagram">
+                    <h3>🔌 LED Pin Information</h3>
+                    <p><strong>Standard LED Pin:</strong> GPIO 2 (bei den meisten Boards).</p>
+                    <p><em>Je nach Board-Typ kann die LED auch an GPIO 5, 22 oder sogar keinem Pin angeschlossen sein. Überprüfe dein Board-Handbuch.</em></p>
                 </div>
             </div>
-            <div class="component-controls">
-                <button class="edit-component">✏️</button>
-                <button class="add-child" data-child-type="skill-item">➕ Skill</button>
-                <button class="move-up">⬆️</button>
-                <button class="move-down">⬇️</button>
-                <button class="delete-component">🗑️</button>
+
+            <!-- Code Tutorial -->
+            <div class="content-card">
+                <h2>📝 Code-Erklärung</h2>
+                
+                <p>Hier ist der komplette Code zuerst als voller Block (kopiere ihn direkt in die Arduino IDE). Ich habe ihn mit Farb-Highlighting gegliedert, um ihn lesbarer zu machen. Danach zerlege ich ihn in Teile mit Erklärungen.</p>
+
+                <div class="code-block">
+<span class="code-comment">/*
+  ESP32 LED Blink Example
+  ------------------------
+  Dieses Programm lässt die eingebaute LED auf einem ESP32-Board blinken.
+  
+  Erklärung:
+  - Viele ESP32-Boards haben eine eingebaute LED, die mit einem GPIO-Pin verbunden ist.
+  - Häufig ist es GPIO 2, manchmal aber auch GPIO 5 oder ein anderer.
+  - Mit diesem Sketch kannst du ganz einfach prüfen, ob deine LED funktioniert.
+*/</span>
+
+<span class="code-keyword">#define</span> LED_BUILTIN <span class="code-number">2</span>   <span class="code-comment">// Auf den meisten ESP32-Boards ist die eingebaute LED an Pin 2</span>
+
+<span class="code-comment">// Die setup()-Funktion läuft einmal beim Start oder nach einem Reset</span>
+<span class="code-keyword">void</span> <span class="code-function">setup</span>() {
+  <span class="code-comment">// PinMode definiert, ob ein GPIO als Eingang oder Ausgang genutzt wird</span>
+  <span class="code-function">pinMode</span>(LED_BUILTIN, OUTPUT);  
+
+  <span class="code-comment">// Optional: Serielle Schnittstelle starten (zur Debug-Ausgabe im Serial Monitor)</span>
+  Serial.<span class="code-function">begin</span>(<span class="code-number">115200</span>);  
+  Serial.<span class="code-function">println</span>(<span class="code-string">"ESP32 LED Blink gestartet"</span>);
+}
+
+<span class="code-comment">// Die loop()-Funktion läuft unendlich oft hintereinander</span>
+<span class="code-keyword">void</span> <span class="code-function">loop</span>() {
+  <span class="code-comment">// LED einschalten</span>
+  <span class="code-function">digitalWrite</span>(LED_BUILTIN, HIGH);  
+  Serial.<span class="code-function">println</span>(<span class="code-string">"LED AN"</span>);  
+  <span class="code-function">delay</span>(<span class="code-number">500</span>); <span class="code-comment">// Warte 500 Millisekunden</span>
+
+  <span class="code-comment">// LED ausschalten</span>
+  <span class="code-function">digitalWrite</span>(LED_BUILTIN, LOW);  
+  Serial.<span class="code-function">println</span>(<span class="code-string">"LED AUS"</span>);  
+  <span class="code-function">delay</span>(<span class="code-number">500</span>); <span class="code-comment">// Warte 500 Millisekunden</span>
+}
+
+<span class="code-comment">/*
+  Hinweise:
+  - Wenn deine LED nicht blinkt, prüfe bitte, ob dein ESP32-Board die LED an einem anderen Pin hat.
+    Beispiele:
+    * GPIO 2: Häufig (z. B. bei DOIT ESP32 DEVKIT V1)
+    * GPIO 5: Manchmal (z. B. NodeMCU-32S)
+    * GPIO 22: Selten
+  
+  - Um herauszufinden, welchen Pin dein Board benutzt:
+    * Schaue ins Datenblatt deines Boards
+    * Oder probiere einfach andere Pins (ersetze "#define LED_BUILTIN 2" durch den passenden Pin)
+*/</span>
+                </div>
+
+                <h3>🔍 Code-Analyse Schritt für Schritt:</h3>
+                
+                <h3><span class="step-number">1</span>Pin-Definition</h3>
+                <div class="code-block">
+<span class="code-keyword">#define</span> LED_BUILTIN <span class="code-number">2</span>   <span class="code-comment">// Auf den meisten ESP32-Boards ist die eingebaute LED an Pin 2</span>
+                </div>
+                <p>Hier definieren wir eine Konstante für den LED-Pin. Das macht den Code flexibel – du kannst den Wert ändern, ohne den Rest zu berühren. GPIO 2 ist Standard, aber teste bei Bedarf andere.</p>
+
+                <h3><span class="step-number">2</span>Setup-Funktion</h3>
+                <div class="code-block">
+<span class="code-keyword">void</span> <span class="code-function">setup</span>() {
+  <span class="code-function">pinMode</span>(LED_BUILTIN, OUTPUT);  
+  Serial.<span class="code-function">begin</span>(<span class="code-number">115200</span>);  
+  Serial.<span class="code-function">println</span>(<span class="code-string">"ESP32 LED Blink gestartet"</span>);
+}
+                </div>
+                <ul>
+                    <li><strong>pinMode(LED_BUILTIN, OUTPUT)</strong>: Konfiguriert GPIO 2 als Ausgang (zum Schalten der LED).</li>
+                    <li><strong>Serial.begin(115200)</strong>: Startet die serielle Kommunikation – nützlich für Debugging. 115200 ist eine Standard-Baudrate für ESP32.</li>
+                    <li><strong>Serial.println()</strong>: Gibt eine Startmeldung aus, die du im Serial Monitor siehst.</li>
+                </ul>
+                <p>Tipp für Anfänger: Die setup() läuft nur einmal am Anfang.</p>
+
+                <h3><span class="step-number">3</span>Loop-Funktion</h3>
+                <div class="code-block">
+<span class="code-keyword">void</span> <span class="code-function">loop</span>() {
+  <span class="code-function">digitalWrite</span>(LED_BUILTIN, HIGH);  
+  Serial.<span class="code-function">println</span>(<span class="code-string">"LED AN"</span>);  
+  <span class="code-function">delay</span>(<span class="code-number">500</span>); 
+
+  <span class="code-function">digitalWrite</span>(LED_BUILTIN, LOW);  
+  Serial.<span class="code-function">println</span>(<span class="code-string">"LED AUS"</span>);  
+  <span class="code-function">delay</span>(<span class="code-number">500</span>); 
+}
+                </div>
+                <ul>
+                    <li><strong>digitalWrite(LED_BUILTIN, HIGH)</strong>: Schaltet die LED ein (setzt Pin auf 3.3V).</li>
+                    <li><strong>digitalWrite(LED_BUILTIN, LOW)</strong>: Schaltet die LED aus (setzt Pin auf 0V).</li>
+                    <li><strong>Serial.println("LED AN/AUS")</strong>: Gibt Status-Meldungen aus – hilft beim Debuggen.</li>
+                    <li><strong>delay(500)</strong>: Pausiert für 0.5 Sekunden. Das macht das Blinken sichtbar.</li>
+                </ul>
+                <p>Tipp: Die loop() wiederholt sich endlos – ideal für wiederholende Aufgaben wie Blinken.</p>
             </div>
-        </section>
+
+            <!-- Upload und Test -->
+            <div class="content-card">
+                <h2>🚀 Code hochladen und testen</h2>
+                
+                <h3><span class="step-number">1</span>Code eingeben</h3>
+                <p>Kopiere den kompletten Code oben in ein neues Arduino IDE Fenster (Datei → Neu). Speichere es als .ino-Datei.</p>
+
+                <h3><span class="step-number">2</span>Kompilieren</h3>
+                <p>Klicke auf das Häkchen-Symbol ✓ oder drücke <strong>Strg+R</strong> (Cmd+R auf Mac). Das überprüft auf Fehler. Wenn Fehler kommen, überprüfe Tippfehler.</p>
+
+                <h3><span class="step-number">3</span>Hochladen</h3>
+                <p>Klicke auf den Pfeil-Button → oder drücke <strong>Strg+U</strong> (Cmd+U auf Mac). Der ESP32 muss verbunden sein.</p>
+
+                <div class="info-box">
+                    <strong>📺 Serial Monitor öffnen:</strong> Gehe zu Werkzeuge → Serieller Monitor (Strg+Shift+M). Stelle Baudrate auf 115200, um Meldungen zu sehen.
+                </div>
+
+                <h3><span class="step-number">4</span>Ergebnis</h3>
+                <p>Du solltest sehen:</p>
+                <ul>
+                    <li>Die LED blinkt alle 0.5 Sekunden.</li>
+                    <li>Im Serial Monitor: "LED AN" und "LED AUS" abwechselnd.</li>
+                </ul>
+
+                <div class="success-box">
+                    <strong>🎉 Gratulation!</strong> Du hast dein erstes ESP32-Projekt! Wenn nicht, sieh Problemlösungen unten.
+                </div>
+            </div>
+
+            <!-- Troubleshooting -->
+            <div class="content-card">
+                <h2>🔧 Problemlösungen</h2>
+                
+                <h3>LED blinkt nicht?</h3>
+                <div class="warning-box">
+                    <strong>Mögliche Lösungen:</strong>
+                    <ul>
+                        <li>Probiere anderen LED-Pin: Ändere <code>#define LED_BUILTIN 2</code> zu <code>5</code> oder <code>22</code> und lade neu hoch.</li>
+                        <li>Überprüfe, ob dein Board eine eingebaute LED hat (manche günstige Modelle haben keine).</li>
+                        <li>Schließe eine externe LED an: Verbinde Anode zu GPIO 2, Kathode zu GND via 220Ω-Widerstand. Achte auf Polarität!</li>
+                    </ul>
+                </div>
+
+                <h3>Upload-Fehler?</h3>
+                <div class="warning-box">
+                    <ul>
+                        <li>Halte die "BOOT"-Taste am ESP32 gedrückt, während du hochlädst (drücke beim Klicken auf Upload).</li>
+                        <li>Überprüfe USB-Kabel und Port – probiere einen anderen USB-Anschluss.</li>
+                        <li>Stelle sicher, dass der richtige Port und Board-Typ ausgewählt ist.</li>
+                        <li>Reduziere Upload-Geschwindigkeit: Gehe zu Werkzeuge → Upload Speed → 115200 oder niedriger.</li>
+                    </ul>
+                </div>
+
+                <h3>Nächste Schritte</h3>
+                <p>Experimentiere weiter:</p>
+                <ul>
+                    <li>Ändere delay(500) zu anderen Werten für schnellere/längere Blinks.</li>
+                    <li>Erstelle Muster: Z.B. dreimal kurz blinken, dann Pause.</li>
+                    <li>Mehr LEDs: Verwende weitere GPIO-Pins wie 4 oder 15.</li>
+                    <li>Fortgeschritten: Nutze analogWrite für PWM (Dimmen) – aber starte einfach.</li>
+                </ul>
+            </div>
+        </main>
     </div>
-
-    <!-- Komponenten Templates -->
-    <div id="component-templates" style="display: none;">
-        <!-- Projekt Card Template -->
-        <div class="project-card template" data-template="project-card">
-            <span class="project-icon editable" data-field="icon">⚡</span>
-            <h3 class="editable" data-field="title">Projekt Titel</h3>
-            <p class="editable" data-field="description">Projekt Beschreibung</p>
-            <div class="tech-stack">
-                <span class="tech-tag editable" data-field="tech1">Tech 1</span>
-                <span class="tech-tag editable" data-field="tech2">Tech 2</span>
-            </div>
-            <div class="component-controls">
-                <button class="edit-component">✏️</button>
-                <button class="duplicate-component">📋</button>
-                <button class="delete-component">🗑️</button>
-            </div>
-        </div>
-
-        <!-- Skill Item Template -->
-        <div class="skill-item template" data-template="skill-item">
-            <span class="skill-icon editable" data-field="icon">🔧</span>
-            <h3 class="editable" data-field="title">Skill Name</h3>
-            <p class="editable" data-field="description">Skill Beschreibung</p>
-            <div class="component-controls">
-                <button class="edit-component">✏️</button>
-                <button class="duplicate-component">📋</button>
-                <button class="delete-component">🗑️</button>
-            </div>
-        </div>
-
-        <!-- Tutorial Card Template -->
-        <div class="tutorial-card template" data-template="tutorial-card">
-            <div class="tutorial-thumbnail">
-                <span class="tutorial-icon editable" data-field="icon">📚</span>
-            </div>
-            <div class="tutorial-content">
-                <h3 class="editable" data-field="title">Tutorial Titel</h3>
-                <p class="editable" data-field="description">Tutorial Beschreibung</p>
-                <div class="tutorial-meta">
-                    <span class="tutorial-duration editable" data-field="duration">⏱️ 30 Min</span>
-                    <span class="tutorial-level editable" data-field="level">🎯 Anfänger</span>
-                </div>
-            </div>
-            <div class="component-controls">
-                <button class="edit-component">✏️</button>
-                <button class="duplicate-component">📋</button>
-                <button class="delete-component">🗑️</button>
-            </div>
-        </div>
-
-        <!-- Social Link Template -->
-        <div class="social-link template" data-template="social-link">
-            <span class="social-emoji editable" data-field="emoji">🔗</span>
-            <div>
-                <strong class="editable" data-field="platform">Platform</strong>
-                <span class="editable" data-field="handle">@handle</span>
-            </div>
-            <div class="component-controls">
-                <button class="edit-component">✏️</button>
-                <button class="duplicate-component">📋</button>
-                <button class="delete-component">🗑️</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Edit Modal -->
-    <div id="edit-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Komponente bearbeiten</h3>
-                <button class="close-modal">✕</button>
-            </div>
-            <div class="modal-body" id="edit-form">
-                <!-- Dynamisches Bearbeitungsformular -->
-            </div>
-            <div class="modal-footer">
-                <button id="save-changes" class="btn-primary">Änderungen speichern</button>
-                <button id="cancel-edit" class="btn-secondary">Abbrechen</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Preview/Export Modal -->
-    <div id="preview-modal" class="modal" style="display: none;">
-        <div class="modal-content large">
-            <div class="modal-header">
-                <h3>Website Preview & Export</h3>
-                <button class="close-modal">✕</button>
-            </div>
-            <div class="modal-body">
-                <div class="preview-tabs">
-                    <button class="tab-btn active" data-tab="preview">👁️ Preview</button>
-                    <button class="tab-btn" data-tab="html">📄 HTML</button>
-                    <button class="tab-btn" data-tab="css">🎨 CSS</button>
-                    <button class="tab-btn" data-tab="js">⚡ JavaScript</button>
-                </div>
-                <div class="tab-content">
-                    <div id="preview-tab" class="tab-pane active">
-                        <iframe id="preview-frame"></iframe>
-                    </div>
-                    <div id="html-tab" class="tab-pane">
-                        <textarea id="generated-html" readonly></textarea>
-                    </div>
-                    <div id="css-tab" class="tab-pane">
-                        <textarea id="generated-css" readonly></textarea>
-                    </div>
-                    <div id="js-tab" class="tab-pane">
-                        <textarea id="generated-js" readonly></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button id="download-files" class="btn-primary">📥 Dateien herunterladen</button>
-                <button class="close-modal btn-secondary">Schließen</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="baukasten.js"></script>
 </body>
 </html>
