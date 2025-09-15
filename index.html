@@ -216,7 +216,7 @@
         <header>
             <div class="hero">
                 <h1>💡 ESP32 LED Blink Tutorial</h1>
-                <p class="subtitle">Dein erstes ESP32-Projekt - LED zum Blinken bringen. Mit besser gegliedertem Code und mehr Tipps für Anfänger.</p>
+                <p class="subtitle">Dein erstes ESP32-Projekt - LED zum Blinken bringen. Mit gegliedertem Code und Tipps für Anfänger.</p>
             </div>
         </header>
 
@@ -232,7 +232,7 @@
                 <h3><span class="step-number">2</span>ESP32 Board-Package installieren</h3>
                 <ol>
                     <li>Öffne die Arduino IDE.</li>
-                    <li>Gehe zu <strong>Datei → Voreinstellungen</strong>.</li>
+                    <li>Gehe zu <strong>Datei/File → Voreinstellungen/Preferences</strong>.</li>
                     <li>Füge diese URL in das Feld "Zusätzliche Boardverwalter-URLs" ein (falls mehrere URLs, durch Komma trennen):</li>
                 </ol>
                 
@@ -240,7 +240,7 @@
                 
                 <ol start="4">
                     <li>Klicke auf "OK".</li>
-                    <li>Gehe zu <strong>Werkzeuge → Board → Boardverwalter...</strong>.</li>
+                    <li>Gehe zu <strong>Werkzeuge/Tools → Board → Board auswählen...</strong>.</li>
                     <li>Suche nach "esp32" und installiere das neueste Package von Espressif Systems (z.B. Version 3.x für aktuelle Features).</li>
                 </ol>
 
@@ -288,7 +288,7 @@
             <div class="content-card">
                 <h2>📝 Code-Erklärung</h2>
                 
-                <p>Hier ist der komplette Code zuerst als voller Block (kopiere ihn direkt in die Arduino IDE). Ich habe ihn mit Farb-Highlighting gegliedert, um ihn lesbarer zu machen. Danach zerlege ich ihn in Teile mit Erklärungen.</p>
+                <p>Hier ist der komplette Code zuerst als voller Block (kopiere ihn direkt in die Arduino IDE). Ich habe ihn mit Farb-Highlighting gegliedert, um ihn lesbarer zu machen. Danach zerlege wir ihn in Teile mit Erklärungen.</p>
 
                 <div class="code-block">
 <span class="code-comment">/*
@@ -347,7 +347,7 @@
                 <div class="code-block">
 <span class="code-keyword">#define</span> LED_BUILTIN <span class="code-number">2</span>   <span class="code-comment">// Auf den meisten ESP32-Boards ist die eingebaute LED an Pin 2</span>
                 </div>
-                <p>Hier definieren wir eine Konstante für den LED-Pin. Das macht den Code flexibel – du kannst den Wert ändern, ohne den Rest zu berühren. GPIO 2 ist Standard, aber teste bei Bedarf andere.</p>
+                <p>Hier definieren wir eine Konstante für den LED-Pin. Das macht den Code flexibel, du kannst den Wert ändern, ohne den Rest zu berühren. GPIO 2 ist Standard, aber teste bei Bedarf andere.</p>
 
                 <h3><span class="step-number">2</span>Setup-Funktion</h3>
                 <div class="code-block">
