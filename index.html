@@ -1,454 +1,316 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESP32 LED Blink Tutorial </title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            color: white;
-        }
-
-        .hero {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .content-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #667eea;
-            font-size: 1.5rem;
-        }
-
-        h3 {
-            color: #34495e;
-            margin-bottom: 15px;
-            margin-top: 25px;
-            font-size: 1.2rem;
-        }
-
-        .step-number {
-            display: inline-block;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 30px;
-            margin-right: 10px;
-            font-weight: bold;
-        }
-
-        .code-block {
-            background: #2d3748;
-            color: #e2e8f0;
-            padding: 20px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            line-height: 1.5;
-            overflow-x: auto;
-            margin: 20px 0;
-            border-left: 4px solid #667eea;
-            white-space: pre-wrap; /* Bessere Lesbarkeit auf kleinen Bildschirmen */
-        }
-
-        .code-comment {
-            color: #6f42c1;
-            font-style: italic;
-        }
-
-        .code-keyword {
-            color: #d73a49;
-            font-weight: bold;
-        }
-
-        .code-string {
-            color: #34c759
-        }
-
-        .code-function {
-            color: #005cc5;
-        }
-
-        .code-number {
-            color: #22863a; /* Neu: Für Zahlen */
-        }
-
-        .warning-box {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            border-left: 4px solid #f39c12;
-        }
-
-        .info-box {
-            background: #d1ecf1;
-            border: 1px solid #bee5eb;
-            color: #0c5460;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            border-left: 4px solid #17a2b8;
-        }
-
-        .success-box {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            border-left: 4px solid #28a745;
-        }
-
-        ul, ol {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        .download-link {
-            display: inline-block;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 25px;
-            margin: 10px 5px;
-            transition: transform 0.3s ease;
-        }
-
-        .download-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .pin-diagram {
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .hero {
-                padding: 25px;
-            }
-            
-            .content-card {
-                padding: 20px;
-            }
-
-            .code-block {
-                font-size: 12px; /* Kleiner auf Mobil für bessere Lesbarkeit */
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Kindlicher Endlos Platformer</title>
+  <script src="https://cdn.jsdelivr.net/npm/p5@2.0.5/lib/p5.js"></script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="hero">
-                <h1>💡 ESP32 LED Blink Tutorial</h1>
-                <p class="subtitle">Dein erstes ESP32-Projekt - LED zum Blinken bringen. Mit gegliedertem Code und Tipps für Anfänger.</p>
-            </div>
-        </header>
+<script>
+let player;
+let platforms = [];
+let islands = [];
+let trees = [];
+let clouds = [];
+let collectibles = [];
+let gravity = 0.6;
+let jumpForce = -12;
+let scrollSpeed = 0;
+let scrollOffset = 0;
+let score = 0;
+let lives = 3;
+let maxLives = 5;
+let checkpoint;
+let gameState = 'playing';
+let restartButton;
+let lastPlatformY = 0; // Neu: Für erreichbare Höhen
 
-        <main>
-            <!-- Arduino IDE Setup -->
-            <div class="content-card">
-                <h2>🔧 Arduino IDE für ESP32 einrichten</h2>
-                
-                <h3><span class="step-number">1</span>Arduino IDE herunterladen</h3>
-                <p>Falls noch nicht vorhanden, lade die Arduino IDE von der offiziellen Website herunter. Achte auf die neueste Version (aktuell 2.x), um Kompatibilitätsprobleme zu vermeiden.</p>
-                <a href="https://www.arduino.cc/en/software" class="download-link" target="_blank">Arduino IDE Download</a>
-                
-                <h3><span class="step-number">2</span>ESP32 Board-Package installieren</h3>
-                <ol>
-                    <li>Öffne die Arduino IDE.</li>
-                    <li>Gehe zu <strong>Datei/File → Voreinstellungen/Preferences</strong>.</li>
-                    <li>Füge diese URL in das Feld "Zusätzliche Boardverwalter-URLs" ein (falls mehrere URLs, durch Komma trennen):</li>
-                </ol>
-                
-                <div class="code-block">https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json</div>
-                
-                <ol start="4">
-                    <li>Klicke auf "OK".</li>
-                    <li>Gehe zu <strong>Werkzeuge/Tools → Board → Board auswählen...</strong>.</li>
-                    <li>Suche nach "esp32" und installiere das neueste Package von Espressif Systems (z.B. Version 3.x für aktuelle Features).</li>
-                </ol>
+function setup() {
+  createCanvas(800, 600);
+  // Checkpoint nach createCanvas initialisieren
+  checkpoint = {x: 0, y: height - 50};
+  resetGame();
+}
 
-                <div class="info-box">
-                    <strong>💡 Tipp:</strong> Die Installation kann 5-10 Minuten dauern. Schließe keine anderen Programme, die USB-Ports nutzen, um Konflikte zu vermeiden.
-                </div>
+function resetGame() {
+  player = {
+    x: width / 2,
+    y: height - 50,
+    w: 30,
+    h: 30,
+    vy: 0,
+    jumpsLeft: 2,
+    rotation: 0,
+    rotationSpeed: 0
+  };
+  platforms = [];
+  islands = [];
+  trees = [];
+  clouds = [];
+  collectibles = [];
+  // Erste Plattform unter dem Spieler
+  platforms.push({
+    x: 0,
+    y: height - 20,
+    w: width * 2,
+    h: 20,
+    type: 'normal'
+  });
+  lastPlatformY = height - 20; // Initialisiere letzte Höhe
+  // Erste Wolke und Baum für Atmosphäre
+  clouds.push({ x: width / 2, y: 100 });
+  // Baum auf kleiner Insel
+  islands.push({ x: width / 2 + 100, y: height - 20, w: 50, h: 20 });
+  trees.push({ x: width / 2 + 100 + 25, y: height - 20 });
+  scrollOffset = 0;
+  score = 0;
+  lives = 3;
+  gameState = 'playing';
+  if (restartButton) {
+    restartButton.remove();
+  }
+  loop();
+}
 
-                <h3><span class="step-number">3</span>ESP32 Board auswählen</h3>
-                <ol>
-                    <li>Schließe deinen ESP32 per USB an den Computer an (verwende ein gutes Kabel, um Verbindungsfehler zu vermeiden).</li>
-                    <li>Gehe zu <strong>Werkzeuge → Board → ESP32 Arduino</strong>.</li>
-                    <li>Wähle dein ESP32-Board aus (z.B. "ESP32 Dev Module" oder "DOIT ESP32 DEVKIT V1" – schau in dein Board-Datenblatt, wenn unsicher).</li>
-                    <li>Wähle den korrekten Port unter <strong>Werkzeuge → Port</strong> (wenn nicht sichtbar, überprüfe Gerätemanager unter Windows).</li>
-                </ol>
-
-                <div class="warning-box">
-                    <strong>⚠️ Wichtig:</strong> Unter Windows/Mac/Linux können USB-Treiber fehlen. Lade CP210x oder CH340-Treiber von der Espressif-Website, falls der Port nicht erkannt wird. 
-https://learn.sparkfun.com/tutorials/how-to-install-ch340-drivers/all
-                </div>
-            </div>
-
-            <!-- Das Projekt -->
-            <div class="content-card">
-                <h2>💻 Das LED Blink Projekt</h2>
-                
-                <div class="success-box">
-                    <strong>🎯 Ziel:</strong> Wir bringen die eingebaute LED des ESP32 zum Blinken - das "Hello World" der Mikrocontroller-Programmierung! Perfekt für Anfänger, um Basics zu lernen.
-                </div>
-
-                <h3>Was du brauchst:</h3>
-                <ul>
-                    <li>ESP32 Development Board (z.B. ESP32-WROOM-32).</li>
-                    <li>USB-Kabel (Micro-USB oder Type-C, je nach Board).</li>
-                    <li>Computer mit Arduino IDE.</li>
-                    <li>Optionale: Externe LED und Widerstand, falls die eingebaute nicht funktioniert.</li>
-                </ul>
-
-                <div class="pin-diagram">
-                    <h3>🔌 LED Pin Information</h3>
-                    <p><strong>Standard LED Pin:</strong> GPIO 2 (bei den meisten Boards).</p>
-                    <p><em>Je nach Board-Typ kann die LED auch an GPIO 5, 22 oder sogar keinem Pin angeschlossen sein. Überprüfe dein Board-Handbuch.</em></p>
-                </div>
-            </div>
-
-            <!-- Code Tutorial -->
-            <div class="content-card">
-                <h2>📝 Code-Erklärung</h2>
-                
-                <p>Hier ist der komplette Code zuerst als voller Block (kopiere ihn direkt in die Arduino IDE). Ich habe ihn mit Farb-Highlighting gegliedert, um ihn lesbarer zu machen. Danach zerlege wir ihn in Teile mit Erklärungen.</p>
-
-                <div class="code-block">
-<span class="code-comment">/*
-  ESP32 LED Blink Example
-  ------------------------
-  Dieses Programm lässt die eingebaute LED auf einem ESP32-Board blinken.
+function draw() {
+  if (gameState === 'gameover') {
+    return;
+  }
   
-  Erklärung:
-  - Viele ESP32-Boards haben eine eingebaute LED, die mit einem GPIO-Pin verbunden ist.
-  - Häufig ist es GPIO 2, manchmal aber auch GPIO 5 oder ein anderer.
-  - Mit diesem Sketch kannst du ganz einfach prüfen, ob deine LED funktioniert.
-*/</span>
-
-<span class="code-keyword">#define</span> LED_BUILTIN <span class="code-number">2</span>   <span class="code-comment">// Auf den meisten ESP32-Boards ist die eingebaute LED an Pin 2</span>
-
-<span class="code-comment">// Die setup()-Funktion läuft einmal beim Start oder nach einem Reset</span>
-<span class="code-keyword">void</span> <span class="code-function">setup</span>() {
-  <span class="code-comment">// PinMode definiert, ob ein GPIO als Eingang oder Ausgang genutzt wird</span>
-  <span class="code-function">pinMode</span>(LED_BUILTIN, OUTPUT);  
-
-  <span class="code-comment">// Optional: Serielle Schnittstelle starten (zur Debug-Ausgabe im Serial Monitor)</span>
-  Serial.<span class="code-function">begin</span>(<span class="code-number">115200</span>);  
-  Serial.<span class="code-function">println</span>(<span class="code-string">"ESP32 LED Blink gestartet"</span>);
-}
-
-<span class="code-comment">// Die loop()-Funktion läuft unendlich oft hintereinander</span>
-<span class="code-keyword">void</span> <span class="code-function">loop</span>() {
-  <span class="code-comment">// LED einschalten</span>
-  <span class="code-function">digitalWrite</span>(LED_BUILTIN, HIGH);  
-  Serial.<span class="code-function">println</span>(<span class="code-string">"LED AN"</span>);  
-  <span class="code-function">delay</span>(<span class="code-number">500</span>); <span class="code-comment">// Warte 500 Millisekunden</span>
-
-  <span class="code-comment">// LED ausschalten</span>
-  <span class="code-function">digitalWrite</span>(LED_BUILTIN, LOW);  
-  Serial.<span class="code-function">println</span>(<span class="code-string">"LED AUS"</span>);  
-  <span class="code-function">delay</span>(<span class="code-number">500</span>); <span class="code-comment">// Warte 500 Millisekunden</span>
-}
-
-<span class="code-comment">/*
-  Hinweise:
-  - Wenn deine LED nicht blinkt, prüfe bitte, ob dein ESP32-Board die LED an einem anderen Pin hat.
-    Beispiele:
-    * GPIO 2: Häufig (z. B. bei DOIT ESP32 DEVKIT V1)
-    * GPIO 5: Manchmal (z. B. NodeMCU-32S)
-    * GPIO 22: Selten
+  // Blauer Himmel-Hintergrund
+  background(135, 206, 235);
   
-  - Um herauszufinden, welchen Pin dein Board benutzt:
-    * Schaue ins Datenblatt deines Boards
-    * Oder probiere einfach andere Pins (ersetze "#define LED_BUILTIN 2" durch den passenden Pin)
-*/</span>
-                </div>
-
-                <h3>🔍 Code-Analyse Schritt für Schritt:</h3>
-                
-                <h3><span class="step-number">1</span>Pin-Definition</h3>
-                <div class="code-block">
-<span class="code-keyword">#define</span> LED_BUILTIN <span class="code-number">2</span>   <span class="code-comment">// Auf den meisten ESP32-Boards ist die eingebaute LED an Pin 2</span>
-                </div>
-                <p>Hier definieren wir eine Konstante für den LED-Pin. Das macht den Code flexibel, du kannst den Wert ändern, ohne den Rest zu berühren. GPIO 2 ist Standard, aber teste bei Bedarf andere.</p>
-
-                <h3><span class="step-number">2</span>Setup-Funktion</h3>
-                <div class="code-block">
-<span class="code-keyword">void</span> <span class="code-function">setup</span>() {
-  <span class="code-function">pinMode</span>(LED_BUILTIN, OUTPUT);  
-  Serial.<span class="code-function">begin</span>(<span class="code-number">115200</span>);  
-  Serial.<span class="code-function">println</span>(<span class="code-string">"ESP32 LED Blink gestartet"</span>);
+  // Lava am Boden zeichnen
+  fill(255, 69, 0);
+  rect(0, height - 10, width, 10);
+  
+  // Scroll-Speed basierend auf Input
+  scrollSpeed = 0;
+  if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) { // D
+    scrollSpeed = 3;
+  }
+  if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) { // A
+    scrollSpeed = -3;
+  }
+  scrollOffset += scrollSpeed;
+  
+  // Rotation bei Bewegung (Indikator dreht sich)
+  if (player.jumpsLeft === 2) { // Nur am Boden oder nach Reset, um Sprung-Rotation nicht zu überschreiben
+    player.rotationSpeed = scrollSpeed * 0.05; // Proportional, Richtung beachten
+  }
+  
+  // Spieler-Physik
+  player.vy += gravity;
+  player.y += player.vy;
+  player.rotation += player.rotationSpeed;
+  
+  // Lava (Boden) prüfen - Leben verlieren
+  if (player.y + player.h > height) {
+    lives--;
+    if (lives > 0) {
+      // Respawn bei Checkpoint
+      player.x = width / 2;
+      player.y = checkpoint.y;
+      scrollOffset = checkpoint.x;
+      player.vy = 0;
+      player.jumpsLeft = 2;
+      player.rotation = 0;
+      player.rotationSpeed = 0;
+    } else {
+      gameOver();
+    }
+    return;
+  }
+  
+  // Kollisionserkennung für Plattformen und Inseln
+  let onGround = false;
+  let allPlatforms = [...platforms, ...islands];
+  for (let platform of allPlatforms) {
+    let platformScreenX = platform.x - scrollOffset;
+    
+    if (player.x + player.w > platformScreenX && 
+        player.x < platformScreenX + platform.w &&
+        player.y + player.h > platform.y &&
+        player.y + player.h < platform.y + platform.h + player.vy &&
+        player.vy >= 0) {
+      player.y = platform.y - player.h;
+      player.vy = 0;
+      player.jumpsLeft = 2;
+      player.rotationSpeed = 0;
+      player.rotation = 0;
+      onGround = true;
+    }
+  }
+  
+  // Collectibles prüfen
+  for (let i = collectibles.length - 1; i >= 0; i--) {
+    let coll = collectibles[i];
+    let collScreenX = coll.x - scrollOffset;
+    if (player.x + player.w > collScreenX && 
+        player.x < collScreenX + 20 &&
+        player.y + player.h > coll.y && 
+        player.y < coll.y + 20) {
+      if (coll.type === 'life' && lives < maxLives) {
+        lives++;
+      } else if (coll.type === 'checkpoint') {
+        checkpoint = {x: scrollOffset, y: coll.y - player.h};
+      }
+      collectibles.splice(i, 1);
+    }
+  }
+  
+  // Plattformen generieren (erreichbar: begrenzte Abstände und Höhen)
+  let lastPlatform = platforms[platforms.length - 1] || islands[islands.length - 1];
+  if (lastPlatform.x - scrollOffset + lastPlatform.w < width) {
+    let newX = lastPlatform.x + lastPlatform.w + random(50, 120); // Kürzerer max Abstand für Erreichbarkeit
+    let newY = lastPlatformY + random(-80, 80); // Begrenzte Höhenänderung basierend auf letzter
+    newY = constrain(newY, height * 0.4, height * 0.8); // Gesamtbegrenzung
+    let newW = random(80, 180);
+    let platType = random(['normal', 'high', 'long']);
+    if (platType === 'high') newY -= 30; // Weniger hoch für Erreichbarkeit
+    if (platType === 'long') newW += 50;
+    platforms.push({
+      x: newX,
+      y: newY,
+      w: newW,
+      h: 20,
+      type: platType
+    });
+    lastPlatformY = newY; // Update letzte Höhe
+    
+    // Selten eine Insel mit Collectible (ähnlich erreichbar)
+    if (random() < 0.1) {
+      let islandX = newX + random(150, 250); // Etwas näher
+      let islandY = lastPlatformY + random(-80, 80);
+      islandY = constrain(islandY, height * 0.4, height * 0.6);
+      islands.push({
+        x: islandX,
+        y: islandY,
+        w: 60,
+        h: 20
+      });
+      let collType = random() < 0.5 ? 'life' : 'checkpoint';
+      collectibles.push({
+        x: islandX + 20,
+        y: islandY - 20,
+        type: collType
+      });
+      if (random() < 0.5) {
+        trees.push({ x: islandX + 30, y: islandY });
+      }
+      lastPlatformY = islandY; // Update für Konsistenz
+    }
+  }
+  
+  // Wolken generieren
+  if (frameCount % 300 === 0) {
+    clouds.push({ x: scrollOffset + width + random(50, 100), y: random(50, 150) });
+  }
+  
+  // Alte Objekte entfernen
+  platforms = platforms.filter(p => p.x - scrollOffset + p.w > 0);
+  islands = islands.filter(i => i.x - scrollOffset + i.w > 0);
+  trees = trees.filter(t => t.x - scrollOffset + 50 > 0);
+  clouds = clouds.filter(c => c.x - scrollOffset + 100 > 0);
+  collectibles = collectibles.filter(c => c.x - scrollOffset + 20 > 0);
+  
+  // Wolken zeichnen
+  fill(255, 255, 255, 200);
+  noStroke();
+  for (let cloud of clouds) {
+    let cx = cloud.x - scrollOffset;
+    ellipse(cx, cloud.y, 80, 50);
+    ellipse(cx + 40, cloud.y, 60, 40);
+    ellipse(cx - 40, cloud.y, 60, 40);
+  }
+  
+  // Bäume zeichnen
+  for (let tree of trees) {
+    let tx = tree.x - scrollOffset;
+    fill(139, 69, 19); // Braun für Stamm
+    rect(tx - 10, tree.y - 40, 20, 40);
+    fill(34, 139, 34); // Grün für Krone
+    triangle(tx - 30, tree.y - 40, tx + 30, tree.y - 40, tx, tree.y - 80);
+  }
+  
+  // Plattformen und Inseln zeichnen (dunkleres Grün)
+  fill(100, 200, 100);
+  for (let platform of platforms) {
+    let platformScreenX = platform.x - scrollOffset;
+    rect(platformScreenX, platform.y, platform.w, platform.h, 10);
+  }
+  for (let island of islands) {
+    let islandScreenX = island.x - scrollOffset;
+    rect(islandScreenX, island.y, island.w, island.h, 10);
+  }
+  
+  // Collectibles zeichnen
+  for (let coll of collectibles) {
+    let cx = coll.x - scrollOffset;
+    if (coll.type === 'life') {
+      fill(255, 215, 0);
+      star(cx + 10, coll.y + 10, 5, 10, 5);
+    } else if (coll.type === 'checkpoint') {
+      fill(255, 0, 0);
+      triangle(cx, coll.y, cx + 20, coll.y + 10, cx, coll.y + 20);
+    }
+  }
+  
+  // Spieler zeichnen (mit Rotation und Punkt)
+  push();
+  translate(player.x + player.w / 2, player.y + player.h / 2);
+  rotate(player.rotation);
+  fill(255, 215, 0);
+  ellipse(0, 0, player.w, player.h);
+  fill(0);
+  ellipse(10, 0, 5, 5);
+  pop();
+  
+  // Score und Lives anzeigen
+  fill(255, 105, 180);
+  textSize(24);
+  text('Punkte: ' + floor(score / 10), 10, 30);
+  text('Leben: ' + lives, 10, 60);
+  
+  // Score basierend auf Distanz
+  if (scrollSpeed > 0) {
+    score += scrollSpeed;
+  }
 }
-                </div>
-                <ul>
-                    <li><strong>pinMode(LED_BUILTIN, OUTPUT)</strong>: Konfiguriert GPIO 2 als Ausgang (zum Schalten der LED).</li>
-                    <li><strong>Serial.begin(115200)</strong>: Startet die serielle Kommunikation – nützlich für Debugging. 115200 ist eine Standard-Baudrate für ESP32.</li>
-                    <li><strong>Serial.println()</strong>: Gibt eine Startmeldung aus, die du im Serial Monitor siehst.</li>
-                </ul>
-                <p>Tipp für Anfänger: Die setup() läuft nur einmal am Anfang.</p>
 
-                <h3><span class="step-number">3</span>Loop-Funktion</h3>
-                <div class="code-block">
-<span class="code-keyword">void</span> <span class="code-function">loop</span>() {
-  <span class="code-function">digitalWrite</span>(LED_BUILTIN, HIGH);  
-  Serial.<span class="code-function">println</span>(<span class="code-string">"LED AN"</span>);  
-  <span class="code-function">delay</span>(<span class="code-number">500</span>); 
-
-  <span class="code-function">digitalWrite</span>(LED_BUILTIN, LOW);  
-  Serial.<span class="code-function">println</span>(<span class="code-string">"LED AUS"</span>);  
-  <span class="code-function">delay</span>(<span class="code-number">500</span>); 
+function keyPressed() {
+  if (keyCode === 32 && player.jumpsLeft > 0) {
+    player.vy = jumpForce;
+    player.jumpsLeft--;
+    player.rotationSpeed = TWO_PI / 60;
+  }
+  if (key === 'F') {
+    fullscreen(!fullscreen());
+  }
 }
-                </div>
-                <ul>
-                    <li><strong>digitalWrite(LED_BUILTIN, HIGH)</strong>: Schaltet die LED ein (setzt Pin auf 3.3V).</li>
-                    <li><strong>digitalWrite(LED_BUILTIN, LOW)</strong>: Schaltet die LED aus (setzt Pin auf 0V).</li>
-                    <li><strong>Serial.println("LED AN/AUS")</strong>: Gibt Status-Meldungen aus – hilft beim Debuggen.</li>
-                    <li><strong>delay(500)</strong>: Pausiert für 0.5 Sekunden. Das macht das Blinken sichtbar.</li>
-                </ul>
-                <p>Tipp: Die loop() wiederholt sich endlos – ideal für wiederholende Aufgaben wie Blinken.</p>
-            </div>
 
-            <!-- Upload und Test -->
-            <div class="content-card">
-                <h2>🚀 Code hochladen und testen</h2>
-                
-                <h3><span class="step-number">1</span>Code eingeben</h3>
-                <p>Kopiere den kompletten Code oben in ein neues Arduino IDE Fenster (Datei → Neu). Speichere es als .ino-Datei.</p>
+function star(x, y, radius1, radius2, npoints) {
+  let angle = TWO_PI / npoints;
+  let halfAngle = angle / 2.0;
+  beginShape();
+  for (let a = 0; a < TWO_PI; a += angle) {
+    let sx = x + cos(a) * radius2;
+    let sy = y + sin(a) * radius2;
+    vertex(sx, sy);
+    sx = x + cos(a + halfAngle) * radius1;
+    sy = y + sin(a + halfAngle) * radius1;
+    vertex(sx, sy);
+  }
+  endShape(CLOSE);
+}
 
-                <h3><span class="step-number">2</span>Kompilieren</h3>
-                <p>Klicke auf das Häkchen-Symbol ✓ oder drücke <strong>Strg+R</strong>. Das überprüft auf Fehler. Wenn Fehler kommen, überprüfe Tippfehler.</p>
-
-                <h3><span class="step-number">3</span>Hochladen</h3>
-                <p>Klicke auf den Pfeil-Button → oder drücke <strong>Strg+U</strong>. Der ESP32 muss verbunden sein.</p>
-
-                <div class="info-box">
-                    <strong>📺 Serial Monitor öffnen:</strong> Gehe zu Werkzeuge → Serieller Monitor (Strg+Shift+M). Stelle Baudrate auf 115200, um Meldungen zu sehen.
-                </div>
-
-                <h3><span class="step-number">4</span>Ergebnis</h3>
-                <p>Du solltest sehen:</p>
-                <ul>
-                    <li>Die LED blinkt alle 0.5 Sekunden.</li>
-                    <li>Im Serial Monitor: "LED AN" und "LED AUS" abwechselnd.</li>
-                </ul>
-
-                <div class="success-box">
-                    <strong>🎉 Gratulation!</strong> Du hast dein erstes ESP32-Projekt! Wenn nicht, sieh Problemlösungen unten.
-                </div>
-            </div>
-
-            <!-- Troubleshooting -->
-            <div class="content-card">
-                <h2>🔧 Problemlösungen</h2>
-                
-                <h3>LED blinkt nicht?</h3>
-                <div class="warning-box">
-                    <strong>Mögliche Lösungen:</strong>
-                    <ul>
-                        <li>Probiere anderen LED-Pin: Ändere <code>#define LED_BUILTIN 2</code> zu <code>5</code> oder <code>22</code> und lade neu hoch.</li>
-                        <li>Überprüfe, ob dein Board eine eingebaute LED hat (manche günstige Modelle haben keine).</li>
-                        <li>Schließe eine externe LED an: Verbinde Anode zu GPIO 2, Kathode zu GND via 220Ω-Widerstand. Achte auf Polarität!</li>
-                    </ul>
-                </div>
-
-                <h3>Upload-Fehler?</h3>
-                <div class="warning-box">
-                    <ul>
-                        <li>Halte die "BOOT"-Taste am ESP32 gedrückt, während du hochlädst (drücke beim Klicken auf Upload).</li>
-                        <li>Überprüfe USB-Kabel und Port – probiere einen anderen USB-Anschluss.</li>
-                        <li>Stelle sicher, dass der richtige Port und Board-Typ ausgewählt ist.</li>
-                        <li>Reduziere Upload-Geschwindigkeit: Gehe zu Werkzeuge → Upload Speed → 115200 oder niedriger.</li>
-                    </ul>
-                </div>
-
-                <h3>Nächste Schritte</h3>
-                <p>Experimentiere weiter:</p>
-                <ul>
-                    <li>Ändere delay(500) zu anderen Werten für schnellere/längere Blinks.</li>
-                    <li>Erstelle Muster: Z.B. dreimal kurz blinken, dann Pause.</li>
-                    <li>Mehr LEDs: Verwende weitere GPIO-Pins wie 4 oder 15.</li>
-                    <li>Fortgeschritten: Nutze analogWrite für PWM (Dimmen) – aber starte einfach.</li>
-                </ul>
-            </div>
-        </main>
-    </div>
+function gameOver() {
+  gameState = 'gameover';
+  noLoop();
+  restartButton = createButton('Nochmal spielen!');
+  restartButton.position(width / 2 - 50, height / 2);
+  restartButton.mousePressed(resetGame);
+}
+</script>
 </body>
 </html>
