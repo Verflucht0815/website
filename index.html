@@ -23,11 +23,10 @@ let maxLives = 5;
 let checkpoint;
 let gameState = 'playing';
 let restartButton;
-let lastPlatformY = 0; // Neu: Für erreichbare Höhen
+let lastPlatformY = 0;
 
 function setup() {
   createCanvas(800, 600);
-  // Checkpoint nach createCanvas initialisieren
   checkpoint = {x: 0, y: height - 50};
   resetGame();
 }
@@ -48,7 +47,6 @@ function resetGame() {
   trees = [];
   clouds = [];
   collectibles = [];
-  // Erste Plattform unter dem Spieler
   platforms.push({
     x: 0,
     y: height - 20,
@@ -56,10 +54,8 @@ function resetGame() {
     h: 20,
     type: 'normal'
   });
-  lastPlatformY = height - 20; // Initialisiere letzte Höhe
-  // Erste Wolke und Baum für Atmosphäre
+  lastPlatformY = height - 20;
   clouds.push({ x: width / 2, y: 100 });
-  // Baum auf kleiner Insel
   islands.push({ x: width / 2 + 100, y: height - 20, w: 50, h: 20 });
   trees.push({ x: width / 2 + 100 + 25, y: height - 20 });
   scrollOffset = 0;
@@ -86,17 +82,19 @@ function draw() {
   
   // Scroll-Speed basierend auf Input
   scrollSpeed = 0;
-  if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) { // D
+  if (keyIsDown(RIGHT_ARROW) || key === 'd' || key === 'D') {
     scrollSpeed = 3;
+    console.log('Right/D pressed'); // Debugging
   }
-  if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) { // A
+  if (keyIsDown(LEFT_ARROW) || key === 'a' || key === 'A') {
     scrollSpeed = -3;
+    console.log('Left/A pressed'); // Debugging
   }
   scrollOffset += scrollSpeed;
   
-  // Rotation bei Bewegung (Indikator dreht sich)
-  if (player.jumpsLeft === 2) { // Nur am Boden oder nach Reset, um Sprung-Rotation nicht zu überschreiben
-    player.rotationSpeed = scrollSpeed * 0.05; // Proportional, Richtung beachten
+  // Rotation bei Bewegung
+  if (player.jumpsLeft === 2) {
+    player.rotationSpeed = scrollSpeed * 0.05;
   }
   
   // Spieler-Physik
@@ -108,6 +106,32 @@ function draw() {
   if (player.y + player.h > height) {
     lives--;
     if (lives > 0) {
+      // Prüfe Plattform unter Checkpoint
+      let checkpointSafe = false;
+      let allPlatforms = [...platforms, ...islands];
+      for (let platform of allPlatforms) {
+        let platformScreenX = platform.x - scrollOffset;
+        if (player.x + player.w > platformScreenX && 
+            player.x < platformScreenX + platform.w &&
+            abs(checkpoint.y - (platform.y - player.h)) < 10) {
+          checkpointSafe = true;
+          break;
+        }
+      }
+      if (!checkpointSafe) {
+        // Neue Plattform unter Checkpoint
+        let newPlatformX = checkpoint.x + width / 2;
+        let newPlatformY = checkpoint.y + player.h;
+        platforms.push({
+          x: newPlatformX,
+          y: newPlatformY,
+          w: 100,
+          h: 20,
+          type: 'normal'
+        });
+        lastPlatformY = newPlatformY;
+        console.log('Added safe platform at checkpoint:', newPlatformX, newPlatformY); // Debugging
+      }
       // Respawn bei Checkpoint
       player.x = width / 2;
       player.y = checkpoint.y;
@@ -159,15 +183,15 @@ function draw() {
     }
   }
   
-  // Plattformen generieren (erreichbar: begrenzte Abstände und Höhen)
+  // Plattformen generieren (erreichbar)
   let lastPlatform = platforms[platforms.length - 1] || islands[islands.length - 1];
   if (lastPlatform.x - scrollOffset + lastPlatform.w < width) {
-    let newX = lastPlatform.x + lastPlatform.w + random(50, 120); // Kürzerer max Abstand für Erreichbarkeit
-    let newY = lastPlatformY + random(-80, 80); // Begrenzte Höhenänderung basierend auf letzter
-    newY = constrain(newY, height * 0.4, height * 0.8); // Gesamtbegrenzung
+    let newX = lastPlatform.x + lastPlatform.w + random(50, 120);
+    let newY = lastPlatformY + random(-80, 80);
+    newY = constrain(newY, height * 0.4, height * 0.8);
     let newW = random(80, 180);
     let platType = random(['normal', 'high', 'long']);
-    if (platType === 'high') newY -= 30; // Weniger hoch für Erreichbarkeit
+    if (platType === 'high') newY -= 30;
     if (platType === 'long') newW += 50;
     platforms.push({
       x: newX,
@@ -176,11 +200,11 @@ function draw() {
       h: 20,
       type: platType
     });
-    lastPlatformY = newY; // Update letzte Höhe
+    lastPlatformY = newY;
     
-    // Selten eine Insel mit Collectible (ähnlich erreichbar)
+    // Selten eine Insel mit Collectible
     if (random() < 0.1) {
-      let islandX = newX + random(150, 250); // Etwas näher
+      let islandX = newX + random(150, 250);
       let islandY = lastPlatformY + random(-80, 80);
       islandY = constrain(islandY, height * 0.4, height * 0.6);
       islands.push({
@@ -198,7 +222,7 @@ function draw() {
       if (random() < 0.5) {
         trees.push({ x: islandX + 30, y: islandY });
       }
-      lastPlatformY = islandY; // Update für Konsistenz
+      lastPlatformY = islandY;
     }
   }
   
@@ -227,9 +251,9 @@ function draw() {
   // Bäume zeichnen
   for (let tree of trees) {
     let tx = tree.x - scrollOffset;
-    fill(139, 69, 19); // Braun für Stamm
+    fill(139, 69, 19);
     rect(tx - 10, tree.y - 40, 20, 40);
-    fill(34, 139, 34); // Grün für Krone
+    fill(34, 139, 34);
     triangle(tx - 30, tree.y - 40, tx + 30, tree.y - 40, tx, tree.y - 80);
   }
   
